@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* Cores e fontes do tema. Viram classes do Tailwind: bg-fundo, text-ciano, font-tecnica... */
+@theme inline {
+  --color-fundo: #07090d;
+  --color-painel: #0e141b;
+  --color-amarelo: #fcee09;
+  --color-ciano: #00f0ff;
+  --color-alerta: #ff003c;
+  --color-texto: #d7dde5;
+  --color-suave: #8a96a6;
+  --font-sans: var(--fonte-chakra), sans-serif;
+  --font-tecnica: var(--fonte-mono), monospace;
+}
+
+body {
+  background-color: var(--color-fundo);
+  color: var(--color-texto);
+}
+
+/* Fundo com trilhas de circuito/rede (SVG repetido, bem discreto) */
+.trilhas {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' fill='none' stroke='%2300f0ff' stroke-opacity='.16'%3E%3Cpath d='M0 40h60l20 20h60l20-20h80M0 140h100l20 20h40l20-20h60M120 0v60M60 240v-70l20-20'/%3E%3Cg fill='%2300f0ff' fill-opacity='.3' stroke='none'%3E%3Ccircle cx='60' cy='40' r='3'/%3E%3Ccircle cx='160' cy='40' r='3'/%3E%3Ccircle cx='120' cy='60' r='3'/%3E%3Ccircle cx='100' cy='140' r='3'/%3E%3Ccircle cx='180' cy='140' r='3'/%3E%3Ccircle cx='80' cy='150' r='3'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Cantos cortados, como os paineis da UI do Cyberpunk 2077 */
+.chanfro {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+}
+
+/* Pulso de luz que corre pelas linhas da trilha */
+.pulso {
+  background-color: rgb(0 240 255 / 0.25);
+  background-image: linear-gradient(90deg, transparent, var(--color-ciano), transparent);
+  background-size: 200% 100%;
+  animation: pulso 2.4s linear infinite;
+}
+
+@keyframes pulso {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulso { animation: none; }
+}
+
+/* Foco visivel para navegar pelo teclado */
+a:focus-visible {
+  outline: 2px solid var(--color-ciano);
+  outline-offset: 3px;
+}
